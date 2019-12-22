@@ -1,0 +1,7 @@
+{
+  "name": "gh-actions-weather-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Petros Kyriakou <9pitops@gmail.com>",
+  "license": "MIT"
+}
