@@ -1,0 +1,22 @@
+name: 'GitHub Actions Weather Bot'
+
+on:
+  push:
+  schedule:
+    - cron: '0 14 * * *'
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: 'Install node'
+        uses: actions/setup-node@v1
+      - name: 'Install NPM dependencies'
+        run: npm install
+      - name: 'Run code'
+        run: node index.js
+        env:
+          ACCUWEATHER_API_KEY: ${{ secrets.ACCUWEATHER_API_KEY }}
+          SLACK_WEBHOOK_SECRET: ${{ secrets.SLACK_WEBHOOK_SECRET }}
+          LIMASSOL_LOCATION_KEY: ${{ secrets.LIMASSOL_LOCATION_KEY }}
