@@ -53,17 +53,21 @@ const postToSlack = async message => {
 }
 
 const main = async () => {
+  const message = []
   for (let i = 0; i < CITIES.length; i++) {
     const { name, locationKey } = CITIES[i]
 
     try {
       const weatherData = await getWeatherData(locationKey)
       const weatherString = generateWeatherMessage(weatherData, name)
-      await postToSlack(weatherString)
+      message.push(weatherString)
     } catch (err) {
-      await postToSlack(`Unable to get weather data. Error: ${err.message}`)
+      message.push(
+        `Unable to get weather data for ${name}. Error: ${err.message}`
+      )
     }
   }
+  await postToSlack(message.join('\n'))
 }
 
 main()
